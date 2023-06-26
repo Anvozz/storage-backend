@@ -1,0 +1,21 @@
+services:
+  database:
+    container_name: pg_storage_database
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: xVz99!axzLoz
+      POSTGRES_DB: test_db
+    ports:
+      - '5432:5432'
+
+  pgadmin:
+    container_name: pgadmin4_container_storage
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sankaapb@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 1234567890
+    ports:
+      - '5050:80'
