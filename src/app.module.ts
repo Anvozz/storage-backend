@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { AutomapperModule } from '@automapper/nestjs';
+import { classes } from '@automapper/classes';
 
 @Module({
   imports: [
@@ -25,6 +27,9 @@ import { User } from './users/entities/user.entity';
         synchronize: process.env.NODE_ENV != 'production',
       }),
       inject: [ConfigService],
+    }),
+    AutomapperModule.forRoot({
+      strategyInitializer: classes(),
     }),
     UsersModule,
   ],

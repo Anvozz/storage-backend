@@ -1,8 +1,9 @@
 import { AutoMap } from '@automapper/classes';
+import { UserLevelEnum } from '../entities/user.entity';
 
 export class GetuserDTO {
   @AutoMap()
-  id: number;
+  id: string;
 
   @AutoMap()
   email: string;
@@ -27,4 +28,7 @@ export class GetuserDTO {
 
   @AutoMap()
   updatedAt: Date;
+
+  @AutoMap()
+  usergroup: UserLevelEnum;
 }
