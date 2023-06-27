@@ -66,8 +66,27 @@ export class UsersService {
     return response;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string): Promise<ServiceResponse<GetuserDTO>> {
+    const response = new ServiceResponse<GetuserDTO>();
+    if (!id)
+      throw new HttpException('DELETE_ERROR_ID_EMPTY', HttpStatus.BAD_REQUEST);
+    try {
+      const data = await this.classMapper.mapAsync(
+        await this.userRepository.findOne({
+          where: {
+            id: id,
+          },
+        }),
+        User,
+        GetuserDTO,
+      );
+      if (!data)
+        throw new HttpException('GET_USER_ID_NOTFOUND', HttpStatus.NOT_FOUND);
+      response.data = data;
+    } catch (error) {
+      return HttpErrorException(error);
+    }
+    return response;
   }
 
   async update(
@@ -101,7 +120,7 @@ export class UsersService {
       });
       if (!user)
         new HttpException('DELETE_ERROR_ID_NOTFOUND', HttpStatus.NOT_FOUND);
-      await this.userRepository.delete(user);
+      await this.userRepository.delete(id);
       response.message = 'DELETE_USER_SUCCESSFULLY';
     } catch (error) {
       return HttpErrorException(error);
