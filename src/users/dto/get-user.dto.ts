@@ -1,27 +1,34 @@
 import { AutoMap } from '@automapper/classes';
-import { ApiProperty } from '@nestjs/swagger';
 import { UserLevelEnum } from '../entities/user.entity';
 
-export class CreateUserDto {
+export class GetuserDTO {
   @AutoMap()
-  @ApiProperty()
+  id: string;
+
+  @AutoMap()
   email: string;
+
   @AutoMap()
-  @ApiProperty()
   tel: string;
+
   @AutoMap()
-  @ApiProperty()
   username: string;
+
   @AutoMap()
-  @ApiProperty()
-  password: string;
-  @AutoMap()
-  @ApiProperty()
   firstname: string;
+
   @AutoMap()
-  @ApiProperty()
   lastname: string;
+
   @AutoMap()
-  @ApiProperty()
+  isActive: boolean;
+
+  @AutoMap()
+  createdAt: Date;
+
+  @AutoMap()
+  updatedAt: Date;
+
+  @AutoMap()
   usergroup: UserLevelEnum;
 }
