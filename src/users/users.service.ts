@@ -127,4 +127,9 @@ export class UsersService {
     }
     return response;
   }
+
+  async getUser(request) {
+    const responseuser = await this.userRepository.findOneBy(request);
+    return responseuser;
+  }
 }
